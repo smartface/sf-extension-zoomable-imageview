@@ -1,0 +1,1 @@
+# sf-extension-zoomable-imageview
