@@ -1,7 +1,6 @@
 # ZoomableImageView Extension from Smartface
 [![Twitter: @Smartface_io](https://img.shields.io/badge/contact-@Smartface_io-blue.svg?style=flat)](https://twitter.com/smartface_io)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/smartface/sf-extension-amce/blob/master/LICENSE)
-![npm version](https://img.shields.io/npm/v/sf-extension-amce.svg?style=flat)
 
 An extension to ImageView component with Smartface Native Framework.
 
@@ -9,8 +8,8 @@ An extension to ImageView component with Smartface Native Framework.
 ZoomableImageView Extension can be installed via npm easily from our public npm repository. The installation is pretty easy via Smartface Cloud IDE.
 
 - Open terminals
-- `(cd ~/workspace/scripts && npm i -S sf-extension-zoomableimageview)`
-- Finally require the extension as: `require("sf-extension-zoomableimageview")`
+- `(cd ~/workspace/scripts && npm i -S sf-extension-zoomable-imageview)`
+- Finally require the extension as: `require("sf-extension-zoomable-imageview")`
 
 ## How to use
 1) Create ZoomableImageView object and add to your page layout as child view.
