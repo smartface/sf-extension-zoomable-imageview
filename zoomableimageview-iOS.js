@@ -6,7 +6,8 @@ class ZoomableImageView {
 
     constructor(params) {
         var self = this;
-
+        self.android = {};
+        
         self.imageView = new ImageView();
         self.imageView.nativeObject.yoga.isEnabled = false;
         self.imageView.nativeObject.layer.masksToBounds = false;
