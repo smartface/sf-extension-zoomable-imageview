@@ -6,7 +6,7 @@ class ZoomableImageView {
 
     constructor(params) {
         var self = this;
-        
+
         self.imageView = new ImageView();
         self.imageView.nativeObject.yoga.isEnabled = false;
         self.imageView.nativeObject.layer.masksToBounds = false;
@@ -15,14 +15,26 @@ class ZoomableImageView {
             calculateImageViewFrame();
         };
 
+        delete self.imageView["imageFillType"];
+        Object.defineProperty(self, 'imageFillType', {
+            get: function() {
+                return self.imageView.nativeObject.contentMode;
+            },
+            set: function(value) {
+                self.imageView.nativeObject.contentMode = value;
+                calculateImageViewFrame();
+            },
+            enumerable: true
+        });
+
         var scrollview = new __SF_UIScrollView();
         scrollview.showsHorizontalScrollIndicator = false;
         scrollview.showsVerticalScrollIndicator = false;
         scrollview.addSubview(self.imageView.nativeObject);
         scrollview.viewForZoomingCallback = self.imageView.nativeObject;
-        
-        self.scrollViewJSView = new View({nativeObject : scrollview});
-        
+        scrollview.maximumZoomScale = 3.0; //Default
+        self.scrollViewJSView = new View({ nativeObject: scrollview });
+
         var _frame = {};
         scrollview.addFrameObserver();
         scrollview.frameObserveHandler = function(e) {
@@ -33,11 +45,11 @@ class ZoomableImageView {
 
         var calculateImageViewFrame = function(frame) {
             scrollview.zoomScale = 1;
-            if (self.imageView.imageFillType === ImageView.FillType.ASPECTFILL || self.imageView.imageFillType === ImageView.FillType.STRETCH || self.imageView.imageFillType === ImageView.FillType.ASPECTFIT) {
-                if (frame) {
-                    self.imageView.nativeObject.frame = frame;
-                    scrollview.contentSize = { width: frame.width, height: frame.height };
-                }
+            if (self.imageFillType === ImageView.FillType.ASPECTFILL || self.imageFillType === ImageView.FillType.STRETCH || self.imageFillType === ImageView.FillType.ASPECTFIT) {
+                var innerFrame = frame || scrollview.frame;
+                self.imageView.nativeObject.frame = innerFrame;
+                scrollview.contentSize = { width: innerFrame.width, height: innerFrame.height };
+
             }
             else if (self.imageView.image && self.imageView.image.nativeObject && self.imageView.image.nativeObject.size) {
                 var innerFrame = frame || scrollview.frame;
@@ -79,10 +91,9 @@ class ZoomableImageView {
                 this[param] = params[param];
             }
         }
-        
+
         return new Proxy(this, {
             set: function(obj, prop, value) {
-                console.info("asdasd: ", prop, value);
                 if (self.scrollViewJSView.hasOwnProperty(prop)) {
                     self.scrollViewJSView[prop] = value;
                 }
@@ -99,7 +110,7 @@ class ZoomableImageView {
                     return self.scrollViewJSView.nativeObject;
                 }
                 else if (self.scrollViewJSView.hasOwnProperty(prop)) {
-                   return self.scrollViewJSView[prop];
+                    return self.scrollViewJSView[prop];
                 }
                 else if (self.imageView.hasOwnProperty(prop)) {
                     return self.imageView[prop];
