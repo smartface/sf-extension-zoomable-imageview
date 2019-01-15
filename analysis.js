@@ -27,7 +27,7 @@
  *
  * myPage.layout.addChild(myZoomableImageView); 
  */
- const ZoomableImageView = function(){};
+const ZoomableImageView = function() {};
 
 
 /**
@@ -37,36 +37,41 @@
  * @default
  * @return {number}
  */
- ZoomableImageView.prototype.maximumZoomScale = 3.0;
+ZoomableImageView.prototype.maximumZoomScale = 3.0;
 
 
- /**
+/**
  * Gets/sets the minumumZoomScale of the ZoomableImageView. Pinching to zoom out the image is not allowed beyond of given float number.
  * @property {number}  minumumZoomScale
  * @since 1.0
  * @default
  * @return {number}
  */
- ZoomableImageView.prototype.minumumZoomScale = 1;
+ZoomableImageView.prototype.minumumZoomScale = 1;
 
-  /**
- * Gets/sets the setZoomable of the ZoomableImageView. Enables/Disables  zooming ability of the ZoomableImageView
- * @property {boolean}  setZoomable
+
+
+/**
+ * Sets the scale to zoom.
+ * @method
+ * @param {number} zoomScale - Scale number to zoom
+ * @param {boolean} animation - Enable/Disable animation while zooming
  * @since 1.0
  * @default
- * @return {boolean}
  */
- ZoomableImageView.prototype.setZoomable = true;
+ZoomableImageView.prototype.setZoomScale = function(zoomScale , animation = false) {};
 
 
- /**
+
+/**
  * @namespace
- * @property {object}  android                   - Used for android specific properties.
+ * @property {object}  android    - Used for android specific properties.
  * @property {number}  android.mediumZoomScale 
+ * @property {boolean}  android.setZoomable
  */
- ZoomableImageView.prototype.android = {}
+ZoomableImageView.prototype.android = {}
 
- /**
+/**
  * Gets/sets the mediumZoomScale of the ZoomableImageView. This property defines how to zoom in while tapping double times.
  * Android specific property.
  *
@@ -75,12 +80,15 @@
  * @default
  * @return {boolean}
  */
- ZoomableImageView.prototype.android.mediumZoomScale = 1.75;
-
- 
+ZoomableImageView.prototype.android.mediumZoomScale = 1.75;
 
 
-
-
-
-
+/**
+ * Gets/sets the zoomEnabled of the ZoomableImageView. Enables/Disables  zooming ability of the ZoomableImageView
+ * Android specific property.
+ * @property {boolean}  zoomEnabled
+ * @since 1.0
+ * @default
+ * @return {boolean}
+ */
+ZoomableImageView.prototype.android.zoomEnabled = true;

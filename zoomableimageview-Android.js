@@ -1,6 +1,7 @@
 const AndroidConfig = require("sf-core/util/Android/androidconfig.js");
 const NativePhotoViewer = requireClass("com.github.chrisbanes.photoview.PhotoView");
 const ImageView = require("sf-core/ui/imageview");
+const extend = require("js-base/core/extend");
 
 const ZoomableImageView = extend(ImageView)(
     function(_super, params) {
@@ -8,7 +9,7 @@ const ZoomableImageView = extend(ImageView)(
         if (!this.nativeObject)
             this.nativeObject = new NativePhotoViewer(AndroidConfig.activity);
         this.android = {};
-        
+
         _super(this);
 
         const self = this;
@@ -33,12 +34,9 @@ const ZoomableImageView = extend(ImageView)(
                 },
                 enumerable: true
             },
-            'setZoomable': {
-                get: function() {
-                    return this.nativeObject.isZoomEnabled();
-                },
-                set: function(value) {
-                    this.nativeObject.setZoomable(value);
+            'setZoomScale': {
+                value: function(zoomScale, animation = false) {
+                    this.nativeObject.setScale(zoomScale, animation);
                 },
                 enumerable: true
             }
@@ -52,6 +50,15 @@ const ZoomableImageView = extend(ImageView)(
                 set: function(medScale) {
                     checkZoomLevels(self.minumumZoomScale, self.maximumZoomScale, medScale);
                     self.nativeObject.setMediumScale(float(medScale));
+                },
+                enumerable: true
+            },
+            'zoomEnabled': {
+                get: function() {
+                    return self.nativeObject.isZoomEnabled();
+                },
+                set: function(value) {
+                    self.nativeObject.setZoomable(value);
                 },
                 enumerable: true
             }
@@ -76,3 +83,4 @@ const ZoomableImageView = extend(ImageView)(
         }
     }
 );
+module.exports = ZoomableImageView;
