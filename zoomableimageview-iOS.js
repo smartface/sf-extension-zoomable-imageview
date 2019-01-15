@@ -86,6 +86,13 @@ class ZoomableImageView {
             enumerable: true
         });
 
+        Object.defineProperty(self, 'setZoomScale', {
+            value: function(scale,animated) {
+                self.nativeObject.setZoomScaleAnimated(scale,!!animated);
+            },
+            enumerable: true
+        });
+
         if (params) {
             for (var param in params) {
                 this[param] = params[param];
