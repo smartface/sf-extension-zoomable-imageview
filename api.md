@@ -17,9 +17,10 @@ Note: There are some restirict which should be considered while implementing suc
     * [new ZoomableImageView(params)](#new_ZoomableImageView_new)
     * [.maximumZoomScale](#ZoomableImageView+maximumZoomScale) ⇒ <code>number</code>
     * [.minumumZoomScale](#ZoomableImageView+minumumZoomScale) ⇒ <code>number</code>
-    * [.setZoomable](#ZoomableImageView+setZoomable) ⇒ <code>boolean</code>
     * [.android](#ZoomableImageView+android) : <code>object</code>
         * [.mediumZoomScale](#ZoomableImageView+android.mediumZoomScale) ⇒ <code>boolean</code>
+        * [.zoomEnabled](#ZoomableImageView+android.zoomEnabled) ⇒ <code>boolean</code>
+    * [.setZoomScale(zoomScale, animation)](#ZoomableImageView+setZoomScale)
 
 <a name="new_ZoomableImageView_new"></a>
 
@@ -73,20 +74,6 @@ Gets/sets the minumumZoomScale of the ZoomableImageView. Pinching to zoom out th
 | --- | --- |
 | minumumZoomScale | <code>number</code> | 
 
-<a name="ZoomableImageView+setZoomable"></a>
-
-### zoomableImageView.setZoomable ⇒ <code>boolean</code>
-Gets/sets the setZoomable of the ZoomableImageView. Enables/Disables  zooming ability of the ZoomableImageView
-
-**Kind**: instance property of [<code>ZoomableImageView</code>](#ZoomableImageView)  
-**Default**: <code>true</code>  
-**Since**: 1.0  
-**Properties**
-
-| Name | Type |
-| --- | --- |
-| setZoomable | <code>boolean</code> | 
-
 <a name="ZoomableImageView+android"></a>
 
 ### zoomableImageView.android : <code>object</code>
@@ -97,6 +84,12 @@ Gets/sets the setZoomable of the ZoomableImageView. Enables/Disables  zooming ab
 | --- | --- | --- |
 | android | <code>object</code> | Used for android specific properties. |
 | android.mediumZoomScale | <code>number</code> |  |
+| android.setZoomable | <code>boolean</code> |  |
+
+
+* [.android](#ZoomableImageView+android) : <code>object</code>
+    * [.mediumZoomScale](#ZoomableImageView+android.mediumZoomScale) ⇒ <code>boolean</code>
+    * [.zoomEnabled](#ZoomableImageView+android.zoomEnabled) ⇒ <code>boolean</code>
 
 <a name="ZoomableImageView+android.mediumZoomScale"></a>
 
@@ -112,4 +105,32 @@ Android specific property.
 | Name | Type |
 | --- | --- |
 | mediumZoomScale | <code>boolean</code> | 
+
+<a name="ZoomableImageView+android.zoomEnabled"></a>
+
+#### android.zoomEnabled ⇒ <code>boolean</code>
+Gets/sets the zoomEnabled of the ZoomableImageView. Enables/Disables  zooming ability of the ZoomableImageView
+Android specific property.
+
+**Kind**: static property of [<code>android</code>](#ZoomableImageView+android)  
+**Default**: <code>true</code>  
+**Since**: 1.0  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| zoomEnabled | <code>boolean</code> | 
+
+<a name="ZoomableImageView+setZoomScale"></a>
+
+### zoomableImageView.setZoomScale(zoomScale, animation)
+Sets the scale to zoom.
+
+**Kind**: instance method of [<code>ZoomableImageView</code>](#ZoomableImageView)  
+**Since**: 1.0  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| zoomScale | <code>number</code> | Scale number to zoom |
+| animation | <code>boolean</code> | Enable/Disable animation while zooming |
 
