@@ -1,5 +1,5 @@
 {
-  "name": "sf-plugin-zoomable-imageview",
+  "name": "sf-extension-zoomable-imageview",
   "version": "1.0.1",
   "description": "ZoomableImageView component for Smartface Native Framework",
   "main": "index.js",
