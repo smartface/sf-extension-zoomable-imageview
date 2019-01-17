@@ -93,14 +93,8 @@ class ZoomableImageView {
             },
             enumerable: true
         });
-
-        if (params) {
-            for (var param in params) {
-                this[param] = params[param];
-            }
-        }
-
-        return new Proxy(this, {
+        
+        const proxy = new Proxy(this, {
             set: function(obj, prop, value) {
                 if (self.scrollViewJSView.hasOwnProperty(prop)) {
                     self.scrollViewJSView[prop] = value;
@@ -128,6 +122,14 @@ class ZoomableImageView {
                 }
             }
         });
+        
+        if (params) {
+            for (var param in params) {
+                proxy[param] = params[param];
+            }
+        }
+        
+        return proxy;
     }
 }
 
