@@ -61,8 +61,6 @@ ZoomableImageView.prototype.minumumZoomScale = 1;
  */
 ZoomableImageView.prototype.setZoomScale = function(zoomScale , animation = false) {};
 
-
-
 /**
  * @namespace
  * @property {object}  android    - Used for android specific properties.
@@ -94,6 +92,16 @@ ZoomableImageView.prototype.android.mediumZoomScale = 1.75;
 ZoomableImageView.prototype.android.zoomEnabled = true;
 
 /**
+ * @namespace
+ * @property {object}  ios    - Used for ios specific properties.
+ * @property {number}  ios.minimumNumberOfTouches 
+ * @property {number}  ios.maximumNumberOfTouches
+ * @property {boolean} ios.bounces 
+ * @property {boolean} ios.bouncesZoom
+ */
+ZoomableImageView.prototype.ios = {}
+
+/**
  * Gets/sets the minimumNumberOfTouches of the ZoomableImageView.
  * iOS specific property.
  * @property {number}  minimumNumberOfTouches
@@ -116,19 +124,19 @@ ZoomableImageView.prototype.ios.maximumNumberOfTouches;
 /**
  * Gets/sets the bounces of the ZoomableImageView.
  * iOS specific property.
- * @property {number}  bounces
+ * @property {boolean}  bounces
  * @since 1.0
  * @default
- * @return {number}
+ * @return {boolean}
  */
 ZoomableImageView.prototype.ios.bounces;
 
 /**
  * Gets/sets the bouncesZoom of the ZoomableImageView.
  * iOS specific property.
- * @property {number}  bouncesZoom
+ * @property {boolean}  bouncesZoom
  * @since 1.0
  * @default
- * @return {number}
+ * @return {boolean}
  */
 ZoomableImageView.prototype.ios.bouncesZoom;
