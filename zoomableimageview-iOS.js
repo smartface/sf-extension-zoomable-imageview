@@ -1,3 +1,4 @@
+const System = require("sf-core/device/system");
 const extend = require('js-base/core/extend');
 const ImageView = require('sf-core/ui/imageview');
 const View = require('sf-core/ui/view');
@@ -7,7 +8,8 @@ class ZoomableImageView {
     constructor(params) {
         var self = this;
         self.android = {};
-        
+        const __ios = {};
+
         self.imageView = new ImageView();
         self.imageView.nativeObject.yoga.isEnabled = false;
         self.imageView.nativeObject.layer.masksToBounds = false;
@@ -34,6 +36,13 @@ class ZoomableImageView {
         scrollview.addSubview(self.imageView.nativeObject);
         scrollview.viewForZoomingCallback = self.imageView.nativeObject;
         scrollview.maximumZoomScale = 3.0; //Default
+        scrollview.setValueForKey(false, "bounces"); //Default
+        scrollview.setValueForKey(false, "bouncesZoom"); //Default
+
+        if (System.OSVersion.split(".")[0] >= 11) {
+            scrollview.setValueForKey(2, "contentInsetAdjustmentBehavior");
+        }
+
         self.scrollViewJSView = new View({ nativeObject: scrollview });
 
         var _frame = {};
@@ -69,31 +78,73 @@ class ZoomableImageView {
 
         Object.defineProperty(self, 'minimumZoomScale', {
             get: function() {
-                return self.nativeObject.minimumZoomScale;
+                return scrollview.minimumZoomScale;
             },
             set: function(value) {
-                self.nativeObject.minimumZoomScale = value;
+                scrollview.minimumZoomScale = value;
+            },
+            enumerable: true
+        });
+
+        Object.defineProperty(__ios, 'minimumNumberOfTouches', {
+            get: function() {
+                return scrollview.panGestureRecognizer.minimumNumberOfTouches;
+            },
+            set: function(value) {
+                scrollview.panGestureRecognizer.minimumNumberOfTouches = value;
+            },
+            enumerable: true
+        });
+
+        Object.defineProperty(__ios, 'maximumNumberOfTouches', {
+            get: function() {
+                return scrollview.panGestureRecognizer.maximumNumberOfTouches;
+            },
+            set: function(value) {
+                scrollview.panGestureRecognizer.maximumNumberOfTouches = value;
+            },
+            enumerable: true
+        });
+
+        Object.defineProperty(__ios, 'bounces', {
+            get: function() {
+                return scrollview.valueForKey("bounces");
+            },
+            set: function(value) {
+                scrollview.setValueForKey(value, "bounces");
+            },
+            enumerable: true
+        });
+
+        Object.defineProperty(__ios, 'bouncesZoom', {
+            get: function() {
+                return scrollview.valueForKey("bouncesZoom");
+            },
+            set: function(value) {
+                scrollview.setValueForKey(value, "bouncesZoom");
             },
             enumerable: true
         });
 
         Object.defineProperty(self, 'maximumZoomScale', {
             get: function() {
-                return self.nativeObject.maximumZoomScale;
+                return scrollview.maximumZoomScale;
             },
             set: function(value) {
-                self.nativeObject.maximumZoomScale = value;
+                scrollview.maximumZoomScale = value;
             },
             enumerable: true
         });
 
         Object.defineProperty(self, 'setZoomScale', {
-            value: function(scale,animated) {
-                self.nativeObject.setZoomScaleAnimated(scale,!!animated);
+            value: function(scale, animated) {
+                scrollview.setZoomScaleAnimated(scale, !!animated);
             },
             enumerable: true
         });
-        
+
+
+
         const proxy = new Proxy(this, {
             set: function(obj, prop, value) {
                 if (self.scrollViewJSView.hasOwnProperty(prop)) {
@@ -122,13 +173,22 @@ class ZoomableImageView {
                 }
             }
         });
+
+        proxy.ios = new Proxy(__ios, {
+            set: function(obj, prop, value) {
+                __ios[prop] = value;
+                return true;
+            },
+            get: function(obj, prop) {
+                return __ios[prop];
+            }
+        });
         
         if (params) {
             for (var param in params) {
                 proxy[param] = params[param];
             }
         }
-        
         return proxy;
     }
 }

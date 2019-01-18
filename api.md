@@ -20,6 +20,11 @@ Note: There are some restirict which should be considered while implementing suc
     * [.android](#ZoomableImageView+android) : <code>object</code>
         * [.mediumZoomScale](#ZoomableImageView+android.mediumZoomScale) ⇒ <code>boolean</code>
         * [.zoomEnabled](#ZoomableImageView+android.zoomEnabled) ⇒ <code>boolean</code>
+    * [.ios](#ZoomableImageView+ios) : <code>object</code>
+        * [.minimumNumberOfTouches](#ZoomableImageView+ios.minimumNumberOfTouches) ⇒ <code>number</code>
+        * [.maximumNumberOfTouches](#ZoomableImageView+ios.maximumNumberOfTouches) ⇒ <code>number</code>
+        * [.bounces](#ZoomableImageView+ios.bounces) ⇒ <code>boolean</code>
+        * [.bouncesZoom](#ZoomableImageView+ios.bouncesZoom) ⇒ <code>boolean</code>
     * [.setZoomScale(zoomScale, animation)](#ZoomableImageView+setZoomScale)
 
 <a name="new_ZoomableImageView_new"></a>
@@ -120,6 +125,83 @@ Android specific property.
 | Name | Type |
 | --- | --- |
 | zoomEnabled | <code>boolean</code> | 
+
+<a name="ZoomableImageView+ios"></a>
+
+### zoomableImageView.ios : <code>object</code>
+**Kind**: instance namespace of [<code>ZoomableImageView</code>](#ZoomableImageView)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| ios | <code>object</code> | Used for ios specific properties. |
+| ios.minimumNumberOfTouches | <code>number</code> |  |
+| ios.maximumNumberOfTouches | <code>number</code> |  |
+| ios.bounces | <code>boolean</code> |  |
+| ios.bouncesZoom | <code>boolean</code> |  |
+
+
+* [.ios](#ZoomableImageView+ios) : <code>object</code>
+    * [.minimumNumberOfTouches](#ZoomableImageView+ios.minimumNumberOfTouches) ⇒ <code>number</code>
+    * [.maximumNumberOfTouches](#ZoomableImageView+ios.maximumNumberOfTouches) ⇒ <code>number</code>
+    * [.bounces](#ZoomableImageView+ios.bounces) ⇒ <code>boolean</code>
+    * [.bouncesZoom](#ZoomableImageView+ios.bouncesZoom) ⇒ <code>boolean</code>
+
+<a name="ZoomableImageView+ios.minimumNumberOfTouches"></a>
+
+#### ios.minimumNumberOfTouches ⇒ <code>number</code>
+Gets/sets the minimumNumberOfTouches of the ZoomableImageView.
+iOS specific property.
+
+**Kind**: static property of [<code>ios</code>](#ZoomableImageView+ios)  
+**Since**: 1.0  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| minimumNumberOfTouches | <code>number</code> | 
+
+<a name="ZoomableImageView+ios.maximumNumberOfTouches"></a>
+
+#### ios.maximumNumberOfTouches ⇒ <code>number</code>
+Gets/sets the maximumNumberOfTouches of the ZoomableImageView.
+iOS specific property.
+
+**Kind**: static property of [<code>ios</code>](#ZoomableImageView+ios)  
+**Since**: 1.0  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| maximumNumberOfTouches | <code>number</code> | 
+
+<a name="ZoomableImageView+ios.bounces"></a>
+
+#### ios.bounces ⇒ <code>boolean</code>
+Gets/sets the bounces of the ZoomableImageView.
+iOS specific property.
+
+**Kind**: static property of [<code>ios</code>](#ZoomableImageView+ios)  
+**Since**: 1.0  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| bounces | <code>boolean</code> | 
+
+<a name="ZoomableImageView+ios.bouncesZoom"></a>
+
+#### ios.bouncesZoom ⇒ <code>boolean</code>
+Gets/sets the bouncesZoom of the ZoomableImageView.
+iOS specific property.
+
+**Kind**: static property of [<code>ios</code>](#ZoomableImageView+ios)  
+**Since**: 1.0  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| bouncesZoom | <code>boolean</code> | 
 
 <a name="ZoomableImageView+setZoomScale"></a>
 
