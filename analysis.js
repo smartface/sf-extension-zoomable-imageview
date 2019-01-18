@@ -92,3 +92,43 @@ ZoomableImageView.prototype.android.mediumZoomScale = 1.75;
  * @return {boolean}
  */
 ZoomableImageView.prototype.android.zoomEnabled = true;
+
+/**
+ * Gets/sets the minimumNumberOfTouches of the ZoomableImageView.
+ * iOS specific property.
+ * @property {number}  minimumNumberOfTouches
+ * @since 1.0
+ * @default
+ * @return {number}
+ */
+ZoomableImageView.prototype.ios.minimumNumberOfTouches;
+
+/**
+ * Gets/sets the maximumNumberOfTouches of the ZoomableImageView.
+ * iOS specific property.
+ * @property {number}  maximumNumberOfTouches
+ * @since 1.0
+ * @default
+ * @return {number}
+ */
+ZoomableImageView.prototype.ios.maximumNumberOfTouches;
+
+/**
+ * Gets/sets the bounces of the ZoomableImageView.
+ * iOS specific property.
+ * @property {number}  bounces
+ * @since 1.0
+ * @default
+ * @return {number}
+ */
+ZoomableImageView.prototype.ios.bounces;
+
+/**
+ * Gets/sets the bouncesZoom of the ZoomableImageView.
+ * iOS specific property.
+ * @property {number}  bouncesZoom
+ * @since 1.0
+ * @default
+ * @return {number}
+ */
+ZoomableImageView.prototype.ios.bouncesZoom;
