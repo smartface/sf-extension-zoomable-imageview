@@ -1,3 +1,4 @@
+const System = require("sf-core/device/system");
 const extend = require('js-base/core/extend');
 const ImageView = require('sf-core/ui/imageview');
 const View = require('sf-core/ui/view');
@@ -7,7 +8,8 @@ class ZoomableImageView {
     constructor(params) {
         var self = this;
         self.android = {};
-        
+        self.ios = {};
+
         self.imageView = new ImageView();
         self.imageView.nativeObject.yoga.isEnabled = false;
         self.imageView.nativeObject.layer.masksToBounds = false;
@@ -34,6 +36,13 @@ class ZoomableImageView {
         scrollview.addSubview(self.imageView.nativeObject);
         scrollview.viewForZoomingCallback = self.imageView.nativeObject;
         scrollview.maximumZoomScale = 3.0; //Default
+        scrollview.setValueForKey(false, "bounces"); //Default
+        scrollview.setValueForKey(false, "bouncesZoom"); //Default
+
+        if (System.OSVersion.split(".")[0] >= 11) {
+            scrollview.setValueForKey(2, "contentInsetAdjustmentBehavior");
+        }
+
         self.scrollViewJSView = new View({ nativeObject: scrollview });
 
         var _frame = {};
@@ -77,6 +86,46 @@ class ZoomableImageView {
             enumerable: true
         });
 
+        Object.defineProperty(self.ios, 'minimumNumberOfTouches', {
+            get: function() {
+                return self.nativeObject.panGestureRecognizer.minimumNumberOfTouches;
+            },
+            set: function(value) {
+                self.nativeObject.panGestureRecognizer.minimumNumberOfTouches = value;
+            },
+            enumerable: true
+        });
+
+        Object.defineProperty(self.ios, 'maximumNumberOfTouches', {
+            get: function() {
+                return self.nativeObject.panGestureRecognizer.maximumNumberOfTouches;
+            },
+            set: function(value) {
+                self.nativeObject.panGestureRecognizer.maximumNumberOfTouches = value;
+            },
+            enumerable: true
+        });
+
+        Object.defineProperty(self.ios, 'bounces', {
+            get: function() {
+                return self.nativeObject.nativeObject.valueForKey("bounces");
+            },
+            set: function(value) {
+                self.nativeObject.setValueForKey(value, "bounces");
+            },
+            enumerable: true
+        });
+
+        Object.defineProperty(self.ios, 'bouncesZoom', {
+            get: function() {
+                return self.nativeObject.nativeObject.valueForKey("bouncesZoom");
+            },
+            set: function(value) {
+                self.nativeObject.setValueForKey(value, "bouncesZoom");
+            },
+            enumerable: true
+        });
+
         Object.defineProperty(self, 'maximumZoomScale', {
             get: function() {
                 return self.nativeObject.maximumZoomScale;
@@ -88,12 +137,12 @@ class ZoomableImageView {
         });
 
         Object.defineProperty(self, 'setZoomScale', {
-            value: function(scale,animated) {
-                self.nativeObject.setZoomScaleAnimated(scale,!!animated);
+            value: function(scale, animated) {
+                self.nativeObject.setZoomScaleAnimated(scale, !!animated);
             },
             enumerable: true
         });
-        
+
         const proxy = new Proxy(this, {
             set: function(obj, prop, value) {
                 if (self.scrollViewJSView.hasOwnProperty(prop)) {
@@ -122,13 +171,13 @@ class ZoomableImageView {
                 }
             }
         });
-        
+
         if (params) {
             for (var param in params) {
                 proxy[param] = params[param];
             }
         }
-        
+
         return proxy;
     }
 }

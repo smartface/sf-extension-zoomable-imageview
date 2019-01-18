@@ -8,8 +8,7 @@ const ZoomableImageView = extend(ImageView)(
         params = params || {};
         if (!this.nativeObject)
             this.nativeObject = new NativePhotoViewer(AndroidConfig.activity);
-        this.android = {};
-
+            
         _super(this);
 
         const self = this;
