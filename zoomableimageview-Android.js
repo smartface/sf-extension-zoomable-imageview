@@ -23,7 +23,7 @@ Object.defineProperties(ZoomableImageView.prototype, {
     },
     set: function (maxScale) {
       checkZoomLevels(
-        this.minumumZoomScale,
+        this.minimumZoomScale,
         maxScale,
         this.android.mediumZoomScale
       );
@@ -31,7 +31,7 @@ Object.defineProperties(ZoomableImageView.prototype, {
     },
     enumerable: true,
   },
-  minumumZoomScale: {
+  minimumZoomScale: {
     get: function () {
       return this.nativeObject.getMinimumScale();
     },
@@ -59,7 +59,7 @@ Object.defineProperties(ZoomableImageView.prototype.android, {
       return self.nativeObject.getMediumScale();
     },
     set: function (medScale) {
-      checkZoomLevels(self.minumumZoomScale, self.maximumZoomScale, medScale);
+      checkZoomLevels(self.minimumZoomScale, self.maximumZoomScale, medScale);
       self.nativeObject.setMediumScale(float(medScale));
     },
     enumerable: true,
@@ -78,7 +78,7 @@ Object.defineProperties(ZoomableImageView.prototype.android, {
 function checkZoomLevels(minZoom, maxZoom, midZoom) {
   if (minZoom >= midZoom) {
     throw new Error(
-      "Minimum zoom has to be less than Medium zoom. Assign appropriate value to  minumumZoomScale property "
+      "Minimum zoom has to be less than Medium zoom. Assign appropriate value to  minimumZoomScale property "
     );
   } else if (midZoom >= maxZoom) {
     throw new Error(
