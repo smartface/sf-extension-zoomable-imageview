@@ -62,12 +62,11 @@ export default class ZoomableImageView extends ImageView {
      * Gets/sets the mediumZoomScale of the ZoomableImageView. This property defines how to zoom in while tapping double times.
      * Android specific property.
      *
-     * @property {boolean}  mediumZoomScale
+     * @property {number}  mediumZoomScale
      * @since 1.0
      * @default
-     * @return {boolean}
     */
-    mediumZoomScale: boolean;
+    mediumZoomScale: number;
     /**
      * Gets/sets the zoomEnabled of the ZoomableImageView. Enables/Disables  zooming ability of the ZoomableImageView
      * Android specific property.
