@@ -13,6 +13,8 @@ function ZoomableImageView() {
 
 ZoomableImageView.prototype = Object.create(ImageView.prototype);
 ZoomableImageView.prototype.constructor = ZoomableImageView;
+ZoomableImageView.prototype.android = {};
+ZoomableImageView.prototype.ios = {};
 
 module.exports = ZoomableImageView;
 
