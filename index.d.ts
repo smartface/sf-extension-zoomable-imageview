@@ -76,6 +76,8 @@ export default class ZoomableImageView extends ImageView {
      * @return {boolean}
      */
     zoomEnabled: boolean;
+    elevation: number;
+    zIndex: number;
   }
 
   ios: {
