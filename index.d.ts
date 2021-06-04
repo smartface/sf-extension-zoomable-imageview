@@ -1,4 +1,5 @@
 import ImageView from 'sf-core/ui/imageview';
+import View from 'sf-core/ui/view';
 /**
  * @class ZoomableImageView
  * @param {object} params - init object
@@ -46,7 +47,7 @@ export default class ZoomableImageView extends ImageView {
    * @return {number}
    */
   minimumZoomScale: number;
-  
+
   /**
    * Sets the scale to zoom.
    * @method
@@ -57,7 +58,7 @@ export default class ZoomableImageView extends ImageView {
    */
   setZoomScale: (zoomScale: number, animation?: boolean) => void;
 
-  android: {
+  android: View['Android'] & {
     /**
      * Gets/sets the mediumZoomScale of the ZoomableImageView. This property defines how to zoom in while tapping double times.
      * Android specific property.
@@ -76,11 +77,9 @@ export default class ZoomableImageView extends ImageView {
      * @return {boolean}
      */
     zoomEnabled: boolean;
-    elevation: number;
-    zIndex: number;
   }
 
-  ios: {
+  ios: View['ios'] & {
     /**
      * Gets/sets the minimumNumberOfTouches of the ZoomableImageView.
      * iOS specific property.
@@ -90,7 +89,7 @@ export default class ZoomableImageView extends ImageView {
      * @return {number}
      */
     minimumNumberOfTouches: number;
-  
+
     /**
      * Gets/sets the maximumNumberOfTouches of the ZoomableImageView.
      * iOS specific property.
@@ -100,7 +99,7 @@ export default class ZoomableImageView extends ImageView {
      * @return {number}
      */
     maximumNumberOfTouches: number;
-    
+
     /**
      * Gets/sets the bounces of the ZoomableImageView.
      * iOS specific property.
@@ -110,7 +109,7 @@ export default class ZoomableImageView extends ImageView {
      * @return {boolean}
      */
     bounces: boolean;
-    
+
     /**
      * Gets/sets the bouncesZoom of the ZoomableImageView.
      * iOS specific property.
@@ -122,4 +121,4 @@ export default class ZoomableImageView extends ImageView {
     bouncesZoom: boolean;
   }
 }
- 
+
