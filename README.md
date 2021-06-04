@@ -5,20 +5,20 @@
 An extension to ImageView component with Smartface Native Framework.
 
 ## Installation
-ZoomableImageView Extension can be installed via npm easily from our public npm repository. The installation is pretty easy via Smartface Cloud IDE.
+ZoomableImageView Extension can be installed via npm easily from our public npm repository. Execute the command on scripts directory:
 
-- Open terminals
-- `(cd ~/workspace/scripts && npm i -S sf-extension-zoomable-imageview)`
-- Finally require the extension as: `require("sf-extension-zoomable-imageview")`
+```
+npm i @smartface/extension-zoomable-imageview
+```
 
 ## How to use
 1) Create ZoomableImageView object and add to your page layout as child view.
 ```javascript
-const ZoomableImageView = require("sf-extension-zoomable-imageview");
+import ZoomableImageView from "@smartface/extension-zoomable-imageview";
 
 let myZoomableImageView = new ZoomableImageView({
-width: 250,
-height: 250
+  width: 250,
+  height: 250
 });
 myZoomableImageView.image = "images://smartface.png";
 myZoomableImageView.minumumZoomScale = 0.5; 
@@ -31,15 +31,14 @@ myPage.layout.addChild(myZoomableImageView);
 Android uses third party to give zooming ablity credits on [PhotoView](https://github.com/chrisbanes/PhotoView) 
 
 ## API Documentation
-Full api documentation is in [api.md](./api.md)
+Full api documentation is in wiki of this repository
 
 ## Need Help?
 Please [submit an issue](https://github.com/smartface/sf-extension-zoomable-imageview/issues) on GitHub and provide information about your problem.
 
 ## Support & Documentation & Useful Links
-- [Guides](https://developer.smartface.io)
+- [Guides](https://docs.smartface.io)
 - [API Docs](http://ref.smartface.io)
-- [Smartface Cloud Dashboard](https://cloud.smartface.io)
 
 ## Code of Conduct
 We are committed to making participation in this project a harassment-free experience for everyone, regardless of the level of experience, gender, gender identity and expression, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, religion, or nationality.

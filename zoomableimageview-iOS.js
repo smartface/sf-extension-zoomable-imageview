@@ -1,8 +1,6 @@
 const System = require("sf-core/device/system");
-const extend = require('js-base/core/extend');
 const ImageView = require('sf-core/ui/imageview');
 const View = require('sf-core/ui/view');
-
 class ZoomableImageView {
 
     constructor(params) {
