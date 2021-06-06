@@ -1,5 +1,5 @@
-import ImageView from 'sf-core/ui/imageview';
-import View from 'sf-core/ui/view';
+import ImageView from '@smartface/native/ui/imageview';
+import View from '@smartface/native/ui/view';
 /**
  * @class ZoomableImageView
  * @param {object} params - init object

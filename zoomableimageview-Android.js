@@ -1,8 +1,8 @@
-const AndroidConfig = require("sf-core/util/Android/androidconfig.js");
+const AndroidConfig = require("@smartface/native/util/Android/androidconfig.js");
 const NativePhotoViewer = requireClass(
   "com.github.chrisbanes.photoview.PhotoView"
 );
-const ImageView = require("sf-core/ui/imageview");
+const ImageView = require("@smartface/native/ui/imageview");
 
 function ZoomableImageView() {
   if (!this.nativeObject) {
