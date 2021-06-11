@@ -19,8 +19,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": "https://github.com/smartface/sf-extension-zoomable-imageview",
-  "peerDependencies": {
-    "@smartface/native": "^4.0.0"
-  }
+  "repository": "https://github.com/smartface/sf-extension-zoomable-imageview"
 }
