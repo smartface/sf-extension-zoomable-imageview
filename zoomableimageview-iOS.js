@@ -1,6 +1,6 @@
-const System = require("sf-core/device/system");
-const ImageView = require('sf-core/ui/imageview');
-const View = require('sf-core/ui/view');
+const System = require("@smartface/native/device/system");
+const ImageView = require('@smartface/native/ui/imageview');
+const View = require('@smartface/native/ui/view');
 class ZoomableImageView {
 
     constructor(params) {

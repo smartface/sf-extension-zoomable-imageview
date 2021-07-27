@@ -1,6 +1,6 @@
 {
   "name": "@smartface/extension-zoomable-imageview",
-  "version": "1.1.5",
+  "version": "2.0.0",
   "description": "ZoomableImageView component for Smartface Native Framework",
   "main": "index.js",
   "keywords": [
@@ -19,8 +19,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": "https://github.com/smartface/sf-extension-zoomable-imageview",
-  "peerDependencies": {
-    "@smartface/native": "^4.0.0"
-  }
+  "repository": "https://github.com/smartface/sf-extension-zoomable-imageview"
 }
