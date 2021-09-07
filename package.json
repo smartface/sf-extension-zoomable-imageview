@@ -5,9 +5,8 @@
   "main": "index.js",
   "keywords": [
     "smartface",
-    "plugins",
-    "fabric",
-    "crashlytics",
+    "zoomable",
+    "typescript",
     "javascript"
   ],
   "author": {
@@ -19,5 +18,17 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": "https://github.com/smartface/sf-extension-zoomable-imageview"
+  "repository": "https://github.com/smartface/sf-extension-zoomable-imageview",
+  "scripts": {
+    "watch": "tsc -w",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@smartface/native": "^4.3.4 || ^4.3.5-beta || ^4.3.5.alpha",
+    "@types/node": "^16.6.1",
+    "typescript": "^4.3.5"
+  },
+  "peerDependencies": {
+    "@smartface/native": "^4.3.4 || ^4.3.5-beta || ^4.3.5.alpha"
+  }
 }
