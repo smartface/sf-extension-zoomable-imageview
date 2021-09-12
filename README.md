@@ -1,4 +1,5 @@
 # ZoomableImageView Extension from Smartface
+[![NPM](https://img.shields.io/npm/v/@smartface/extension-zoomable-imageview?style=flat-square)](https://www.npmjs.com/package/@smartface/extension-zoomable-imageview)
 [![Twitter: @Smartface_io](https://img.shields.io/badge/contact-@Smartface_io-blue.svg?style=flat)](https://twitter.com/smartface_io)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/smartface/sf-extension-amce/blob/master/LICENSE)
 
@@ -8,7 +9,7 @@ An extension to ImageView component with Smartface Native Framework.
 ZoomableImageView Extension can be installed via npm easily from our public npm repository. Execute the command on scripts directory:
 
 ```
-npm i @smartface/extension-zoomable-imageview
+yarn add @smartface/extension-zoomable-imageview
 ```
 
 ## How to use
