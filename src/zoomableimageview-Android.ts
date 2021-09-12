@@ -4,6 +4,7 @@ const NativePhotoViewer = requireClass(
     "com.github.chrisbanes.photoview.PhotoView"
 );
 import ImageView from "@smartface/native/ui/imageview"
+import View from "@smartface/native/ui/view";
 
 interface IAndroid {
     /**
@@ -28,8 +29,9 @@ interface IAndroid {
 
 export default class ZoomableImageView extends ImageView {
     nativeObject: any;
-    constructor(args: Partial<typeof ImageView>) {
-        super(args);
+    __ios: Record<string, any> = {};
+    constructor(args?: Partial<ImageView>) {
+        super(args || {});
         this.nativeObject = new NativePhotoViewer(AndroidConfig.activity);
         //@ts-ignore
         this.android = {};
@@ -60,7 +62,8 @@ export default class ZoomableImageView extends ImageView {
           });
     }
     android: IAndroid & ImageView["android"];
-    
+    imageView = new ImageView();
+    scrollViewJSView = new View();
 
     get maximumZoomScale(): number {
         return this.nativeObject.getMaximumScale();

@@ -2,15 +2,13 @@ import System from "@smartface/native/device/system";
 import ImageView from "@smartface/native/ui/imageview";
 import View from "@smartface/native/ui/view";
 
-
-
 export default class ZoomableImageView {
     android: Object;
-    private __ios: Record<string, any>;
+    __ios: Record<string, any>;
     imageView: ImageView;
     scrollViewJSView: View;
     nativeObject: any;
-    constructor(params: Partial<typeof ImageView>) {
+    constructor(params?: Partial<ImageView>) {
         this.android = {};
         this.__ios = {};
         this.imageView = new ImageView();
@@ -218,6 +216,4 @@ export default class ZoomableImageView {
         return proxy;
 
      }
-
-     
 }

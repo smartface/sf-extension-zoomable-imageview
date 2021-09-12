@@ -2,7 +2,7 @@
   "name": "@smartface/extension-zoomable-imageview",
   "version": "3.0.0-rc.1",
   "description": "ZoomableImageView component for Smartface Native Framework",
-  "main": "index.js",
+  "main": "dist/index.js",
   "keywords": [
     "smartface",
     "zoomable",
