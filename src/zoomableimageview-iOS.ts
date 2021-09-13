@@ -2,14 +2,26 @@ import System from "@smartface/native/device/system";
 import ImageView from "@smartface/native/ui/imageview";
 import View from "@smartface/native/ui/view";
 
+interface IIOS {
+    minimumNumberOfTouches?: number;
+    maximumNumberOfTouches?: number;
+    bounces?: boolean;
+    bouncesZoom?: boolean;
+}
+
 export default class ZoomableImageView {
-    android: Object;
-    __ios: Record<string, any>;
+    android: any;
     imageView: ImageView;
     scrollViewJSView: View;
     nativeObject: any;
-    constructor(params?: Partial<ImageView>) {
+    //@ts-ignore
+    scrollView = new __SF_UIScrollView();
+    private __ios: View["ios"] & IIOS;
+
+
+    constructor(params: Partial<typeof ImageView>) {
         this.android = {};
+        //@ts-ignore
         this.__ios = {};
         this.imageView = new ImageView();
         //@ts-ignore
@@ -19,142 +31,70 @@ export default class ZoomableImageView {
         //@ts-ignore
         this.imageView.nativeObject.layer.clipsToBounds = false;
         //@ts-ignore
-        this.imageView.nativeObject.imageDidSet = function() {
-            calculateImageViewFrame();
-        };
+        this.imageView.nativeObject.imageDidSet = () => this.calculateImageViewFrame();
         //@ts-ignore
         delete this.imageView["imageFillType"];
-        Object.defineProperty(this, "imageFillType", {
-            get: () => {
-                //@ts-ignore
-                return this.imageView.nativeObject.contentMode;
-            },
-            set: (value) => {
-                //@ts-ignore
-                this.imageView.nativeObject.contentMode = value;
-                calculateImageViewFrame();
-            },
-            enumerable: true
-        });
-
+        this.scrollView.showsHorizontalScrollIndicator = false;
+        this.scrollView.showsVerticalScrollIndicator = false;
         //@ts-ignore
-        const scrollview = new __SF_UIScrollView();
-        scrollview.showsHorizontalScrollIndicator = false;
-        scrollview.showsVerticalScrollIndicator = false;
+        this.scrollView.addSubview(this.imageView.nativeObject);
         //@ts-ignore
-        scrollview.addSubview(this.imageView.nativeObject);
-        //@ts-ignore
-        scrollview.viewForZoomingCallback = this.imageView.nativeObject;
-        scrollview.maximumZoomScale = 3.0; //Default
-        scrollview.setValueForKey(false, "bounces"); //Default
-        scrollview.setValueForKey(false, "bouncesZoom"); //Default
+        this.scrollView.viewForZoomingCallback = this.imageView.nativeObject;
+        this.scrollView.maximumZoomScale = 3.0; //Default
+        this.scrollView.setValueForKey(false, "bounces"); //Default
+        this.scrollView.setValueForKey(false, "bouncesZoom"); //Default
         if (parseInt(System.OSVersion.split(".")[0]) >= 11) {
-            scrollview.setValueForKey(2, "contentInsetAdjustmentBehavior");
+            this.scrollView.setValueForKey(2, "contentInsetAdjustmentBehavior");
         }
-        this.scrollViewJSView = new View({ nativeObject: scrollview });
 
+        this.scrollViewJSView = new View({ nativeObject: this.scrollView });
         let _frame = {};
-        scrollview.addFrameObserver();
+        this.scrollView.addFrameObserver();
         //@ts-ignore
-        scrollview.frameObserveHandler = (e) => {
+        this.scrollView.frameObserveHandler = (e) => {
             if ((JSON.stringify(_frame) != JSON.stringify(e.frame))) {
-                calculateImageViewFrame(e.frame);
+                this.calculateImageViewFrame(e.frame);
             }
         };
-
-        const calculateImageViewFrame = (frame?: any) => {
-            scrollview.zoomScale = 1;
-            //@ts-ignore
-            if (this.imageFillType === ImageView.FillType.ASPECTFILL || this.imageFillType === ImageView.FillType.STRETCH || this.imageFillType === ImageView.FillType.ASPECTFIT) {
-                var innerFrame = frame || scrollview.frame;
-                //@ts-ignore
-                this.imageView.nativeObject.frame = innerFrame;
-                scrollview.contentSize = { width: innerFrame.width, height: innerFrame.height };
-
-            }
-            //@ts-ignore
-            else if (this.imageView.image && this.imageView.image.nativeObject && this.imageView.image.nativeObject.size) {
-                let innerFrame = frame || scrollview.frame;
-                let image = this.imageView.image;
-                //@ts-ignore
-                let width = image.width < innerFrame.width ? innerFrame.width : image.width;
-                //@ts-ignore
-                let height = image.height < innerFrame.height ? innerFrame.height : image.height;
-                //@ts-ignore
-                this.imageView.nativeObject.frame = { x: 0, y: 0, width: width, height: height };
-                scrollview.contentSize = { width: width, height: height };
-                scrollview.contentOffset = { x: 0, y: 0 };
-            }
-        };
-
-        if(!this.nativeObject) {
-            this.nativeObject = scrollview;
+        if (!this.nativeObject) {
+            this.nativeObject = this.scrollView;
         }
-
-        Object.defineProperty(this, 'minimumZoomScale', {
-            get: () => {
-                return scrollview.minimumZoomScale;
-            },
-            set: (value) => {
-                scrollview.minimumZoomScale = value;
-            },
-            enumerable: true
-        });
-
-        Object.defineProperty(this, 'maximumZoomScale', {
-            get: () => {
-                return scrollview.maximumZoomScale;
-            },
-            set: (value) => {
-                scrollview.maximumZoomScale = value;
-            },
-            enumerable: true
-        });
-
-        Object.defineProperty(this, 'setZoomScale', {
-            //@ts-ignore
-            value: (scale, animated) => {
-                scrollview.setZoomScaleAnimated(scale, !!animated);
-            },
-            enumerable: true
-        });
-
         Object.defineProperty(this.__ios, 'minimumNumberOfTouches', {
             get: () => {
-                return scrollview.panGestureRecognizer.minimumNumberOfTouches;
+                return this.scrollView.panGestureRecognizer.minimumNumberOfTouches;
             },
             set: (value) => {
-                scrollview.panGestureRecognizer.minimumNumberOfTouches = value;
+                this.scrollView.panGestureRecognizer.minimumNumberOfTouches = value;
             },
             enumerable: true
         });
 
         Object.defineProperty(this.__ios, 'maximumNumberOfTouches', {
             get: () => {
-                return scrollview.panGestureRecognizer.maximumNumberOfTouches;
+                return this.scrollView.panGestureRecognizer.maximumNumberOfTouches;
             },
             set: (value) => {
-                scrollview.panGestureRecognizer.maximumNumberOfTouches = value;
+                this.scrollView.panGestureRecognizer.maximumNumberOfTouches = value;
             },
             enumerable: true
         });
 
         Object.defineProperty(this.__ios, 'bounces', {
             get: () => {
-                return scrollview.valueForKey("bounces");
+                return this.scrollView.valueForKey("bounces");
             },
             set: (value) => {
-                scrollview.setValueForKey(value, "bounces");
+                this.scrollView.setValueForKey(value, "bounces");
             },
             enumerable: true
         });
 
         Object.defineProperty(this.__ios, 'bouncesZoom', {
             get: () => {
-                return scrollview.valueForKey("bouncesZoom");
+                return this.scrollView.valueForKey("bouncesZoom");
             },
             set: (value) => {
-                scrollview.setValueForKey(value, "bouncesZoom");
+                this.scrollView.setValueForKey(value, "bouncesZoom");
             },
             enumerable: true
         });
@@ -206,14 +146,70 @@ export default class ZoomableImageView {
                 return this.__ios[prop];
             }
         });
-        
         if (params) {
             for (var param in params) {
                 //@ts-ignore
                 proxy[param] = params[param];
             }
         }
-        return proxy;
 
-     }
+        return proxy;
+    }
+
+    //@ts-ignore
+    get imageFillType() {
+        //@ts-ignore
+        return this.imageView.nativeObject.contentMode;
+    }
+
+    set imageFillType(value) {
+        //@ts-ignore
+        this.imageView.nativeObject.contentMode = value;
+        this.calculateImageViewFrame();
+    }
+
+    get minimumZoomScale(): number {
+        return this.scrollView.minimumZoomScale;
+    }
+
+    set minimumZoomScale(value: number) {
+        this.scrollView.minimumZoomScale = value;
+    }
+
+    get maximumZoomScale(): number {
+        return this.scrollView.maximumZoomScale;
+    }
+
+    set maximumZoomScale(value: number) {
+        this.scrollView.maximumZoomScale = value;
+    }
+
+    setZoomScale = (scale: any, animated: any) => {
+        this.scrollView.setZoomScaleAnimated(scale, !!animated);
+    }
+
+    calculateImageViewFrame = (frame?: any) => {
+        this.scrollView.zoomScale = 1;
+        //@ts-ignore
+        if (this.imageFillType === ImageView.FillType.ASPECTFILL || this.imageFillType === ImageView.FillType.STRETCH || this.imageFillType === ImageView.FillType.ASPECTFIT) {
+            var innerFrame = frame || this.scrollView.frame;
+            //@ts-ignore
+            this.imageView.nativeObject.frame = innerFrame;
+            this.scrollView.contentSize = { width: innerFrame.width, height: innerFrame.height };
+
+        }
+        //@ts-ignore
+        else if (this.imageView.image && this.imageView.image.nativeObject && this.imageView.image.nativeObject.size) {
+            let innerFrame = frame || this.scrollView.frame;
+            let image = this.imageView.image;
+            //@ts-ignore
+            let width = image.width < innerFrame.width ? innerFrame.width : image.width;
+            //@ts-ignore
+            let height = image.height < innerFrame.height ? innerFrame.height : image.height;
+            //@ts-ignore
+            this.imageView.nativeObject.frame = { x: 0, y: 0, width: width, height: height };
+            this.scrollView.contentSize = { width: width, height: height };
+            this.scrollView.contentOffset = { x: 0, y: 0 };
+        }
+    };
 }
