@@ -29,7 +29,8 @@ interface IAndroid {
 
 export default class ZoomableImageView extends ImageView {
     nativeObject: any;
-    __ios: Record<string, any> = {};
+    __ios: any = {};
+    scrollView: any;
     constructor(args?: Partial<ImageView>) {
         super(args || {});
         this.nativeObject = new NativePhotoViewer(AndroidConfig.activity);
@@ -92,6 +93,7 @@ export default class ZoomableImageView extends ImageView {
     setZoomScale(zoomScale: number, animation: boolean = false) {
         this.nativeObject.setScale(zoomScale, animation)
     }
+    calculateImageViewFrame(frame?: any) {}
 }
 
 

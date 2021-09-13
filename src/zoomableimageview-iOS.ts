@@ -15,8 +15,8 @@ export default class ZoomableImageView extends ImageView{
     scrollViewJSView: View;
     nativeObject: any;
     //@ts-ignore
-    private scrollView = new __SF_UIScrollView();
-    private __ios: View["ios"] & IIOS;
+    scrollView = new __SF_UIScrollView();
+    __ios: View["ios"] & IIOS;
 
 
     constructor(params?: Partial<typeof ImageView>) {
@@ -189,7 +189,7 @@ export default class ZoomableImageView extends ImageView{
         this.scrollView.setZoomScaleAnimated(scale, !!animated);
     }
 
-    private calculateImageViewFrame = (frame?: any) => {
+    calculateImageViewFrame = (frame?: any) => {
         this.scrollView.zoomScale = 1;
         //@ts-ignore
         if (this.imageFillType === ImageView.FillType.ASPECTFILL || this.imageFillType === ImageView.FillType.STRETCH || this.imageFillType === ImageView.FillType.ASPECTFIT) {
