@@ -9,17 +9,18 @@ interface IIOS {
     bouncesZoom?: boolean;
 }
 
-export default class ZoomableImageView {
+export default class ZoomableImageView extends ImageView{
     android: any;
     imageView: ImageView;
     scrollViewJSView: View;
     nativeObject: any;
     //@ts-ignore
-    scrollView = new __SF_UIScrollView();
+    private scrollView = new __SF_UIScrollView();
     private __ios: View["ios"] & IIOS;
 
 
-    constructor(params: Partial<typeof ImageView>) {
+    constructor(params?: Partial<typeof ImageView>) {
+        super(params);
         this.android = {};
         //@ts-ignore
         this.__ios = {};
@@ -188,7 +189,7 @@ export default class ZoomableImageView {
         this.scrollView.setZoomScaleAnimated(scale, !!animated);
     }
 
-    calculateImageViewFrame = (frame?: any) => {
+    private calculateImageViewFrame = (frame?: any) => {
         this.scrollView.zoomScale = 1;
         //@ts-ignore
         if (this.imageFillType === ImageView.FillType.ASPECTFILL || this.imageFillType === ImageView.FillType.STRETCH || this.imageFillType === ImageView.FillType.ASPECTFIT) {
