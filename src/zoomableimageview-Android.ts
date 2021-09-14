@@ -5,8 +5,7 @@ const NativePhotoViewer = requireClass(
 );
 import ImageView from "@smartface/native/ui/imageview"
 import View from "@smartface/native/ui/view";
-import { IAndroid, IZoomable } from "types/IZoomable";
-
+import { IAndroid, IZoomable } from "./types/IZoomable";
 
 export default class ZoomableImageView extends ImageView {
     nativeObject: any;

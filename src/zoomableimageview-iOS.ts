@@ -1,8 +1,7 @@
 import System from "@smartface/native/device/system";
 import ImageView from "@smartface/native/ui/imageview";
 import View from "@smartface/native/ui/view";
-import { IIOS, IZoomable } from "types/IZoomable";
-
+import { IIOS, IZoomable } from "./types/IZoomable";
 
 export default class ZoomableImageView extends ImageView{
     android: any;
