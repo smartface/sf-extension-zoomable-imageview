@@ -5,33 +5,14 @@ const NativePhotoViewer = requireClass(
 );
 import ImageView from "@smartface/native/ui/imageview"
 import View from "@smartface/native/ui/view";
+import { IAndroid, IZoomable } from "types/IZoomable";
 
-interface IAndroid {
-    /**
-     * Gets/sets the mediumZoomScale of the ZoomableImageView. This property defines how to zoom in while tapping double times.
-     * Android specific property.
-     *
-     * @property {number}  mediumZoomScale
-     * @since 1.0
-     * @default
-    */
-     mediumZoomScale: number;
-     /**
-      * Gets/sets the zoomEnabled of the ZoomableImageView. Enables/Disables  zooming ability of the ZoomableImageView
-      * Android specific property.
-      * @property {boolean}  zoomEnabled
-      * @since 1.0
-      * @default
-      * @return {boolean}
-      */
-     zoomEnabled: boolean;
-}
 
 export default class ZoomableImageView extends ImageView {
     nativeObject: any;
     __ios: any = {};
     scrollView: any;
-    constructor(args?: Partial<ImageView>) {
+    constructor(args?: Partial<ImageView> & IZoomable) {
         super(args || {});
         this.nativeObject = new NativePhotoViewer(AndroidConfig.activity);
         //@ts-ignore

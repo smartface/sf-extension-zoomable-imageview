@@ -1,13 +1,8 @@
 import System from "@smartface/native/device/system";
 import ImageView from "@smartface/native/ui/imageview";
 import View from "@smartface/native/ui/view";
+import { IIOS, IZoomable } from "types/IZoomable";
 
-interface IIOS {
-    minimumNumberOfTouches?: number;
-    maximumNumberOfTouches?: number;
-    bounces?: boolean;
-    bouncesZoom?: boolean;
-}
 
 export default class ZoomableImageView extends ImageView{
     android: any;
@@ -19,7 +14,7 @@ export default class ZoomableImageView extends ImageView{
     __ios: View["ios"] & IIOS;
 
 
-    constructor(params?: Partial<typeof ImageView>) {
+    constructor(params?: Partial<ImageView> & IZoomable) {
         super(params);
         this.android = {};
         //@ts-ignore
