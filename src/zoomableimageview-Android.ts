@@ -11,9 +11,11 @@ export default class ZoomableImageView extends ImageView {
     nativeObject: any;
     __ios: any = {};
     scrollView: any;
+    //@ts-ignore
     constructor(args?: Partial<ImageView> & IZoomable) {
-        super(args || {});
+        //@ts-ignore
         this.nativeObject = new NativePhotoViewer(AndroidConfig.activity);
+        super(args || {});
         //@ts-ignore
         this.android = {};
         //@ts-ignore

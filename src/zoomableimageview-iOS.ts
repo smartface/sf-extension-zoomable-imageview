@@ -9,11 +9,13 @@ export default class ZoomableImageView extends ImageView{
     scrollViewJSView: View;
     nativeObject: any;
     //@ts-ignore
-    scrollView = new __SF_UIScrollView();
+    scrollView: any;
     __ios: View["ios"] & IIOS;
 
-
+    //@ts-ignore
     constructor(params?: Partial<ImageView> & IZoomable) {
+        //@ts-ignore
+        this.scrollView = new __SF_UIScrollView();
         super(params);
         this.android = {};
         //@ts-ignore
