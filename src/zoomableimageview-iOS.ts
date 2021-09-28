@@ -2,6 +2,7 @@ import System from "@smartface/native/device/system";
 import ImageView from "@smartface/native/ui/imageview";
 import View from "@smartface/native/ui/view";
 import { IIOS, IZoomable } from "./types/IZoomable";
+import Image from "@smartface/native/ui/image";
 
 export default class ZoomableImageView extends ImageView{
     android: any;
@@ -29,8 +30,6 @@ export default class ZoomableImageView extends ImageView{
         this.imageView.nativeObject.layer.clipsToBounds = false;
         //@ts-ignore
         this.imageView.nativeObject.imageDidSet = () => this.calculateImageViewFrame();
-        //@ts-ignore
-        delete this.imageView["imageFillType"];
         this.scrollView.showsHorizontalScrollIndicator = false;
         this.scrollView.showsVerticalScrollIndicator = false;
         //@ts-ignore
@@ -144,7 +143,7 @@ export default class ZoomableImageView extends ImageView{
             }
         });
         if (params) {
-            for (var param in params) {
+            for (let param in params) {
                 //@ts-ignore
                 proxy[param] = params[param];
             }
@@ -187,9 +186,8 @@ export default class ZoomableImageView extends ImageView{
 
     calculateImageViewFrame = (frame?: any) => {
         this.scrollView.zoomScale = 1;
-        //@ts-ignore
         if (this.imageFillType === ImageView.FillType.ASPECTFILL || this.imageFillType === ImageView.FillType.STRETCH || this.imageFillType === ImageView.FillType.ASPECTFIT) {
-            var innerFrame = frame || this.scrollView.frame;
+            let innerFrame = frame || this.scrollView.frame;
             //@ts-ignore
             this.imageView.nativeObject.frame = innerFrame;
             this.scrollView.contentSize = { width: innerFrame.width, height: innerFrame.height };
@@ -198,10 +196,8 @@ export default class ZoomableImageView extends ImageView{
         //@ts-ignore
         else if (this.imageView.image && this.imageView.image.nativeObject && this.imageView.image.nativeObject.size) {
             let innerFrame = frame || this.scrollView.frame;
-            let image = this.imageView.image;
-            //@ts-ignore
+            let image = this.imageView.image as Image;
             let width = image.width < innerFrame.width ? innerFrame.width : image.width;
-            //@ts-ignore
             let height = image.height < innerFrame.height ? innerFrame.height : image.height;
             //@ts-ignore
             this.imageView.nativeObject.frame = { x: 0, y: 0, width: width, height: height };
