@@ -1,3 +1,5 @@
+# NOTE: THIS COMPONENT HAVE BEEN DEPRECATED AND MOVED INSIDE SMARTFACE NATIVE! DO NOT USE THIS COMPONENT IF YOU ARE ABOVE SMARTFACE NATIVE 5.0.0
+
 # ZoomableImageView Extension from Smartface
 
 [![NPM](https://img.shields.io/npm/v/@smartface/extension-zoomable-imageview?style=flat-square)](https://www.npmjs.com/package/@smartface/extension-zoomable-imageview)
@@ -22,9 +24,9 @@ yarn add @smartface/extension-zoomable-imageview
 import ZoomableImageView from "@smartface/extension-zoomable-imageview";
 
 let myZoomableImageView = new ZoomableImageView({
-  width: 250,
-  height: 250,
-  animated: true, //  Gets/sets animation while zooming
+	width: 250,
+	height: 250,
+	animated: true, //  Gets/sets animation while zooming
 });
 myZoomableImageView.image = "images://smartface.png";
 myZoomableImageView.minumumZoomScale = 0;
